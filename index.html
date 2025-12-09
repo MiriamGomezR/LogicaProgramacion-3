@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Calculadora de Factorial</title>
+</head>
+<body>
+    <h1>Calculadora de Factorial</h1>
+    <p>Presiona F12 para ver los mensajes de entrada y salida.</p>
+    <div id="resultadoFactorial">
+        </div>
+    <button onclick="calcularFactorial()">Iniciar Cálculo</button>
+
+    <script>
+     
+        function calcularFactorial() {
+            let numero;
+            let entradaValida = false;
+
+            while (!entradaValida) {
+
+                let entrada = prompt("Introduce un número entero no negativo para calcular su factorial:");
+
+                if (entrada === null) {
+                    console.log("Operación cancelada por el usuario.");
+                    return; // Sale de la función
+                }
+
+                numero = Number(entrada.trim());
+
+                if (!isNaN(numero) && Number.isInteger(numero) && numero >= 0) {
+                    entradaValida = true;
+                } else {
+
+                    console.error(`ERROR: La entrada "${entrada}" no es un número entero no negativo válido.`);
+                    alert(`ERROR: Por favor, introduce un número entero no negativo válido.`);
+                }
+            }
+
+            const resultado = calcular(numero);
+
+            console.log(`---`);
+            console.log(` Resultado del Factorial:`);
+            console.log(`El factorial de ${numero} es: ${resultado}`);
+            console.log(`---`);
+
+            const resultadoDiv = document.getElementById('resultadoFactorial');
+            if (resultadoDiv) {
+                resultadoDiv.innerHTML = `**${numero}** es = **${resultado}**`;
+            } else {
+                alert(`¡Cálculo Exitoso!\nEl factorial de ${numero} es: ${resultado}`);
+            }
+        }
+
+        function calcular(n) {
+            if (n === 0 || n === 1) {
+                return 1;
+            }
+
+            let factorial = 1;
+            for (let i = 2; i <= n; i++) {
+                factorial *= i;
+            }
+            return factorial;
+        }
+    </script>
+</body>
+</html>
